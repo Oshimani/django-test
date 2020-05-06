@@ -1,0 +1,22 @@
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+body .container {
+    margin-top: 2em;
+}
+
+/* GLOBALLY REUSABLE STYLES */
+.fade {
+    transition: opacity 0.2s linear;
+}
+
+.pointer {
+    cursor: pointer;
+}

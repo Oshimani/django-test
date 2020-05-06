@@ -1,36 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'djangotest/base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poll - {{question.id}}</title>
-</head>
+{% block title %}Poll detail - {{ question.id }}{% endblock %}
 
-<body>
-    <h1>
-        {{question.question_text}}
-    </h1>
+{% block head_additions %}
+{% load static %}
+<link rel="stylesheet" href="{%static 'polls/css/detail-style.css' %}">
+{% endblock head_additions %}
 
-    {% if error_message %}
-    <p>
-        <strong>
-            {{error_message}}
-        </strong>
-    </p>
-    {% endif %}
 
-    <form action="{% url 'polls:vote' question.id %}" method="post">
-        {% csrf_token %}
-        {% for choice in question.choice_set.all %}
-        <input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}">
-        <label for="choice{{forloop.counter}}">
-            {{choice.choice_text}}
-        </label>
-        <br>
-        {% endfor %}
-        <input type="submit" value="Vote">
-    </form>
-</body>
+{% block body_block %}
+<div class="polls-detail">
+    <div class="row">
+        <div class="col-12">
 
-</html>
+            <h1>
+                {{question.question_text}}
+            </h1>
+        </div>
+
+        <div class="col-12">
+            {% if error_message %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <strong>Holy guacamole!</strong> {{error_message}}
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="col-12">
+            <form action="{% url 'polls:vote' question.id %}" method="post">
+                {% csrf_token %}
+
+                {% for choice in question.choice_set.all %}
+                <div class="choice form-check">
+                    <label for="choice{{forloop.counter}}" class="pointer form-check-label">
+                        <input type="radio" class="form-check-input" name="choice" id="choice{{forloop.counter}}"
+                            value="{{choice.id}}">
+                        {{choice.choice_text}}
+                    </label>
+                </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,23 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'djangotest/base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poll resul - {{question.id}}</title>
-</head>
+{% block title %}Poll results - {{ question.id }}{% endblock %}
 
-<body>
+{% block head_additions %}
+{% load static %}
+<link rel="stylesheet" href="{%static 'polls/css/results-style.css' %}">
+{% endblock head_additions %}
 
-    <ul>
-        {% for choice in question.choice_set.all %}
-        <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-        {% endfor %}
-    </ul>
+{% block body_block %}
+<div class="poll-results row">
 
-    <a href="{% url 'polls:detail' question.id %}">
-        Vote again?
-    </a>
-</body>
+    <div class="col-12">
+        <h2>Thanks for voting! See the results below.</h2>
+    </div>
 
-</html>
+    <div class="col-12">
+        <ul class="list-group">
+
+            {% for choice in question.choice_set.all %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{choice.choice_text}}
+                <span class="badge badge-secondary badge-pill">{{choice.votes}} vote{{ choice.votes|pluralize }}</span>
+            </li>
+            {% endfor %}
+
+        </ul>
+    </div>
+
+    <div class="col-12">
+        <a class="vote-again" href="{% url 'polls:detail' question.id %}">
+            Vote again?
+        </a>
+    </div>
+    
+</div>
+{% endblock %}

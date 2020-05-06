@@ -1,0 +1,9 @@
+.footer {
+    /* sticky footer */
+    grid-row-start: 3;
+    grid-row-end: 4;
+
+    text-align: center;
+    margin-top: 1em;
+    padding: 1.5em;
+}

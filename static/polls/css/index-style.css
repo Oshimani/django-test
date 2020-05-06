@@ -1,0 +1,9 @@
+.polls-index {}
+
+.polls-index .hover {
+    opacity: 0;
+}
+
+.polls-index .list-group-item:hover .hover {
+    opacity: 1;
+}

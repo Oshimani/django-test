@@ -1,0 +1,42 @@
+.base-nav {
+    font-size: 2em;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+/* BRAND AREA */
+.base-nav .brand-grid {
+    display: grid;
+}
+
+.base-nav .navbar-brand {
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.base-nav .subtext {
+    font-size: 0.45em;
+}
+
+/* NAVIGATION ITEMS */
+.base-nav a {
+    display: grid;
+    align-items: center;
+}
+
+.base-nav a svg {
+    font-size: 2em;
+    justify-self: center;
+}
+
+.base-nav a .text {
+    justify-self: center;
+    font-size: 0.6em;
+
+    /* for animation */
+    opacity: 0;
+}
+
+.base-nav a:hover .text {
+    opacity: 1;
+}

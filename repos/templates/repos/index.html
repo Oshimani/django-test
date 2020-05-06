@@ -1,0 +1,25 @@
+{% extends 'djangotest/base.html' %}
+
+{% block title %}Repos index{% endblock %}
+
+{% block head_additions %}
+{% comment %} {% load static %} {% endcomment %}
+{% comment %} <link rel="stylesheet" href="{%static 'polls/css/index-style.css' %}"> {% endcomment %}
+{% endblock head_additions %}
+
+{% block body_block %}
+{% comment %} {% if latest_question_list %} {% endcomment %}
+<div class="row polls-index">
+
+    <div class="col-12">
+        <h2>
+            These are my repos!
+        </h2>
+    </div>
+
+</div>
+
+{% comment %} {% else %} {% endcomment %}
+
+{% comment %} {% endif %} {% endcomment %}
+{% endblock %}

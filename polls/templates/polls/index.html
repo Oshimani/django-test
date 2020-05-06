@@ -1,24 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'djangotest/base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polls overview</title>
-</head>
+{% block title %}Polls index{% endblock %}
 
-<body>
+{% block head_additions %}
+{% load static %}
+<link rel="stylesheet" href="{%static 'polls/css/index-style.css' %}">
+{% endblock head_additions %}
 
-    {% if latest_question_list %}
-    <ul>
-        {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <p>No polls are available.</p>
-    {% endif %}
+{% block body_block %}
+{% if latest_question_list %}
+<div class="row polls-index">
 
-</body>
+    <div class="col-12">
+        <h2>
+            These are the most recent polls to vote on:
+        </h2>
+    </div>
 
-</html>
+    <div class="col-12">
+        <div class="list-group">
+            {% for question in latest_question_list %}
+            <a href="{% url 'polls:detail' question.id %}" class="list-group-item list-group-item-action">
+                {{question.question_text}}
+                <div class="hover  float-right">
+                    (click anywhere to vote)
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+{% else %}
+<div class="alert alert-info" role="alert">
+    <strong>No Polls!</strong>
+    There are no polls available right now.
+</div>
+{% endif %}
+{% endblock %}
